@@ -42,10 +42,6 @@ public class StudentEntity
 	private String studentState;
 	@Column(unique = true)
 	private String studentPassword;
-	@Column
-	private boolean jobStatus;
-	
-	
 	public int getStudentId() {
 		return studentId;
 	}
@@ -124,12 +120,6 @@ public class StudentEntity
 	public void setStudentPassword(String studentPassword) {
 		this.studentPassword = studentPassword;
 	}
-	public boolean isJobStatus() {
-		return jobStatus;
-	}
-	public void setJobStatus(boolean jobStatus) {
-		this.jobStatus = jobStatus;
-	}
 	@Override
 	public String toString() {
 		return "StudentEntity [studentId=" + studentId + ", studentName=" + studentName + ", studentEmail="
@@ -137,12 +127,12 @@ public class StudentEntity
 				+ ", studentDegree=" + studentDegree + ", studentBranch=" + studentBranch + ", studentAcademicYear="
 				+ studentAcademicYear + ", studentAddress=" + studentAddress + ", studentCity=" + studentCity
 				+ ", studentCountry=" + studentCountry + ", studentState=" + studentState + ", studentPassword="
-				+ studentPassword + ", jobStatus=" + jobStatus + "]";
+				+ studentPassword + "]";
 	}
 	public StudentEntity(int studentId, String studentName, String studentEmail, String studentPhoneno,
 			String studentDateOfBirth, String studentDegree, String studentBranch, int studentAcademicYear,
 			String studentAddress, String studentCity, String studentCountry, String studentState,
-			String studentPassword, boolean jobStatus) {
+			String studentPassword) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -157,14 +147,15 @@ public class StudentEntity
 		this.studentCountry = studentCountry;
 		this.studentState = studentState;
 		this.studentPassword = studentPassword;
-		this.jobStatus = jobStatus;
 	}
 	public StudentEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-			
+	
+	
+	
 	
 	
 	
