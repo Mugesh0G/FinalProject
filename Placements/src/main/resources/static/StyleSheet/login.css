@@ -1,0 +1,55 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+ .background
+ {
+ background: linear-gradient(109.6deg, rgb(0, 37, 84) 11.2%, rgba(0, 37, 84, 0.32) 100.2%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+ }
+ 
+ p
+ {
+  color: white;
+  
+ }
+ a
+ {
+   color: greenyellow;
+
+ }
+ h1
+ {
+  color: #f9fbfc;
+  
+   font-size: 45pt;
+   text-shadow: 6px 0px 6px rgba(41, 38, 40, 1);
+ }
+
+:focus::-webkit-input-placeholder
+{
+  opacity:0.5;
+}
+.container-lg
+{
+  padding-top: 9%;
+  margin-left: 12%;
+ 
+}
+.container-sm
+{
+  margin-top: 24%;
+  
+}
+.container-sm1
+{
+	margin-top: 30px
+}
+.card
+{
+	width: 26rem;
+	box-shadow: 24px 23px 16px rgba(20, 19, 19, 0.3);
+}

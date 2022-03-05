@@ -1,0 +1,42 @@
+header{
+    padding-top: 1%;
+    text-align: center;
+}
+h4{
+    font-weight: 700;
+    color:rgba(57, 230, 149, 0.979);
+    
+}
+.about
+{
+    width: 70%; 
+    height: 80%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.container-sm
+{
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.text-align
+{
+    margin-top: 14%;
+}
+.navbar
+{
+    background-color:rgba(57, 230, 149, 0.979);
+}
+
+b
+{
+    color: white;
+    
+}
+.margin
+{
+    margin-left: 34%;
+}
+li{
+    padding-right: 35px;
+}

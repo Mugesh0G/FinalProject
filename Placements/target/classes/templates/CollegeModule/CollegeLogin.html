@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <link type="text/css" href="/StyleSheet/login.css" rel="stylesheet"/>
+      <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              
+              event.stopPropagation();
+              alert("Please Provide Valid Details");
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+    </script>
+    <title>College | Login</title>
+  </head>
+  <body>
+       <div class="background">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-sm-6">
+        <div class="container-sm">
+        <h1>College Login</h1>
+      <p><a href="/">By Placement Management</a></p>
+        </div>
+        </div>
+
+        <div class="col-sm-6">
+      <div class="card"  >
+        <div class="card-body" >
+        
+          <form class="needs-validation" novalidate action="/collegeverifylogin" method="post">
+            <label for="validationCustom01">Email</label>
+            <div class="form-group">
+              <input name="collegeEmail" type="text" class="form-control" id="validationCustom01" placeholder="eg.abc@gmail.com" required>
+            </div>
+            <label for="validationCustom01">Password</label>
+            <div class="form-group">
+              <input name="collegePassword" type="password" class="form-control" id="validationCustom01" placeholder="eg.aBc123$" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Log In</button>
+            </form>
+            <hr>
+            <!-- Button trigger modal -->
+			<button type="button" class="btn btn-success btn-lg btn-block " data-toggle="modal" data-target="#staticBackdrop">
+			  Create New Account
+			</button>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-scrollable ">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">Create Account</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form class="needs-validation" novalidate action="/saveCollegeDetails" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                <label for="validationCustom01">College Name</label>
+                <input name="collegeName" type="text" class="form-control" id="validationCustom01" placeholder="eg.CIET" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="validationCustom01">Code</label>
+                <input name="collegeCode" type="number" class="form-control" id="validationCustom01" placeholder="eg.2047" required>
+              </div>
+            </div>
+      
+              
+              <div class="form-group">
+                <label for="validationCustom01">College Email</label>
+                <input name="collegeEmail" type="email" class="form-control"id="validationCustom01" placeholder="eg.name@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="validationCustom01">College PhoneNo</label>
+                <input name="collegePhoneNo" type="text" class="form-control" id="validationCustom01" placeholder="916******09" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="validationCustom01">Admin Name</label>
+                <input name="adminName" type="text" class="form-control" id="validationCustom01" placeholder="eg.Tesla" required>
+              </div>
+             
+              <div class="form-group">
+                <label for="validationCustom01">College Address</label>
+                <input name="collegeAddress" type="text" class="form-control" id="validationCustom01" placeholder="1234 Main St" required>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="validationCustom01">City</label>
+                  <input name="collegeCity" type="text" class="form-control"id="validationCustom01" placeholder="eg.Luknow" required>
+                </div>
+              <div class="form-group col-md-4">
+                <label for="validationCustom01">Country</label>
+                <select name="collegeCountry" class="form-control" id="validationCustom01" required >
+                  <option value="">Choose your Country</option>
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  <option value="Japan">Japan</option>
+                  <option value="UAE">UAE</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-5">
+                <label for="validationCustom01">State</label>
+                <select name="collegeState" class="form-control" id="validationCustom01" required >
+                 <option value="">Choose your State</option>
+                  <option value="India">TamilNadu</option>
+                  <option value="USA">Kerala</option>
+                  <option value="Japan">Karnataka</option>
+                  <option value="UAE">AndhraPradesh</option>
+                </select>
+              </div>
+              </div>
+
+             
+            <div class="form-group">
+              <label for="validationCustom01">Password</label>
+              <input type="password" class="form-control"id="validationCustom01" placeholder="Enter your new password" required>
+            </div>
+            <div class="form-group">
+              <label for="validationCustom01">Confirm Your Password</label>
+              <input name="collegePassword" type="password" class="form-control" id="validationCustom01" placeholder="re-enter your new password" required>
+            </div>
+
+             
+            
+           
+           
+			      </div>
+			      <div class="modal-footer">
+			       
+			        <button type="submit" class="btn btn-primary">Continue</button>
+			         </form>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+          </div>
+        </div>
+      </div>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
