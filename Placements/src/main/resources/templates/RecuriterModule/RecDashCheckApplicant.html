@@ -8,13 +8,48 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-    <link type="text/css" href="/StyleSheet/login.css" rel="stylesheet"/>
+    
   
   </head>
   <body>
   <section>
    <title>Recuriter | Check</title>
-  <h1>hello</h1>
+  <link type="text/css" href="/StyleSheet/Dashboard.css" rel="stylesheet"/>
+ <div class="margin-body">
+<div class="container my-4" >
+        
+  <table class="table" >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">StudentName</th>
+      <th scope="col">Degree</th>
+       <th scope="col">Branch</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="student: ${student}">
+      <td th:text="${student.studentName}">StudentName</td>
+      <td th:text="${student.studentDegree}">Degree</td>
+      <td th:text="${student.studentBranch}">Branch</td>
+      <td th:text="${student.studentEmail}">StudentEmail</td>
+      <td th:text="${student.studentPhoneno}">StudentPhoneNo</td>
+      <form th:action="@{'/updateStatus'+${job.jobId}}">
+      <td><input class="btn btn-success" type="submit" value="Accepted" name="applyStatus">
+      <input class="btn btn-danger" type="submit" value="Rejected" name="applyStatus">
+      </td>
+      </form>
+      
+      
+    </tr>
+  </tbody>
+</table>
+</div>
+        
+  </div>
+  
   
   </section> 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

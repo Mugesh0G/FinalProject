@@ -1,14 +1,15 @@
 package com.placement.entity;
 
-import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 @Entity
 public class RecuriterJobPostEntity {
 	@Id
@@ -26,9 +27,24 @@ public class RecuriterJobPostEntity {
 	private String jobDescription;
 	@Column
 	private String jobDeadline;
+	@Column
+	private String applyStatus = "Applied!!";
 	
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	List<StudentEntity>studentList;
 	
-	
+	public String getApplyStatus() {
+		return applyStatus;
+	}
+	public void setApplyStatus(String applyStatus) {
+		this.applyStatus = applyStatus;
+	}
+	public List<StudentEntity> getStudentList() {
+		return studentList;
+	}
+	public void setStudentList(List<StudentEntity> studentList) {
+		this.studentList = studentList;
+	}
 	public int getJobId() {
 		return jobId;
 	}
@@ -75,10 +91,12 @@ public class RecuriterJobPostEntity {
 	public String toString() {
 		return "RecuriterJobPostEntity [jobId=" + jobId + ", jobName=" + jobName + ", companyName=" + companyName
 				+ ", jobSalary=" + jobSalary + ", jobQualification=" + jobQualification + ", jobDescription="
-				+ jobDescription + ", jobDeadline=" + jobDeadline + "]";
+				+ jobDescription + ", jobDeadline=" + jobDeadline + ", applyStatus=" + applyStatus + ", studentList="
+				+ studentList + "]";
 	}
 	public RecuriterJobPostEntity(int jobId, String jobName, String companyName, String jobSalary,
-			String jobQualification, String jobDescription, String jobDeadline) {
+			String jobQualification, String jobDescription, String jobDeadline, String applyStatus,
+			List<StudentEntity> studentList) {
 		super();
 		this.jobId = jobId;
 		this.jobName = jobName;
@@ -87,6 +105,8 @@ public class RecuriterJobPostEntity {
 		this.jobQualification = jobQualification;
 		this.jobDescription = jobDescription;
 		this.jobDeadline = jobDeadline;
+		this.applyStatus = applyStatus;
+		this.studentList = studentList;
 	}
 	public RecuriterJobPostEntity() {
 		super();

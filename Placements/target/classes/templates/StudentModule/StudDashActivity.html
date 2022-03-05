@@ -16,7 +16,33 @@
     <link type="text/css" href="/StyleSheet/Dashboard.css" rel="stylesheet"/>
   <title>Student | Activity</title>
   <div class="margin-body">
-  <h1>hello</h1>
+  <div class="container" >
+        <div class="card-lg">
+          <div class="card-body" >
+  <table class="table " style="background-color: white">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">JobName</th>
+      <th scope="col">CompanyName</th>
+      <th scope="col">Salary</th>
+      <th scope="col">Location</th>
+      <th scope="col">Status</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="job: ${job}">
+      <td th:text="${job.jobName}">JobName</td>
+      <td th:text="${job.companyName}">CompanyName</td>
+      <td th:text="${job.jobQualification}">Qualification</td>
+      <td th:text="${job.jobDescription}">Description</td>
+      <td style="color: Purple" th:text="${job.applyStatus}" >Status</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </div>
+          </div>
   </div>
   
   </section> 

@@ -1,5 +1,7 @@
 package com.placement.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import com.placement.entity.RecuriterJobPostEntity;
 import com.placement.entity.StudentEntity;
@@ -28,6 +29,8 @@ public class StudentController
 	
 	@Autowired
 	RecuriterJobService jobservice;
+	
+	
 	
 	@GetMapping("/s_login")
 	public String login()
@@ -51,8 +54,14 @@ public class StudentController
 	}
 	
 	@GetMapping("/dash_activity")
-	public String dashActivity()
+	public String dashActivity(Model model)
 	{
+		StudentEntity studentEntity = studentServiceObj.findByStudentId(Id);
+		ArrayList<RecuriterJobPostEntity>jobList = new ArrayList<RecuriterJobPostEntity>();
+		jobList.addAll(studentEntity.getJobList());
+		
+		model.addAttribute("job",jobList);
+		model.addAttribute("student",studentEntity);
 		return "StudentModule/StudDashActivity";
 	}
 	
@@ -62,11 +71,36 @@ public class StudentController
 	@PostMapping("/apply{id}")
 	public String applyJob(@PathVariable int id)
 	{
+		StudentEntity studentEntity = studentServiceObj.findByStudentId(Id);
+		RecuriterJobPostEntity jobEntity = jobservice.findByJobId(id);
 		
+		List<RecuriterJobPostEntity>jobList = new LinkedList<RecuriterJobPostEntity>();
+		jobList.add(jobEntity);
 		
-		return "StudentModule/StudDashActivity";
+		List<StudentEntity>studentList = new LinkedList<StudentEntity>();
+		studentList.add(studentEntity);
+		
+		studentEntity.getJobList().add(jobEntity);
+		jobEntity.getStudentList().add(studentEntity);
+		
+		studentServiceObj.addStudentDetails(studentEntity);
+		jobservice.addJobs(jobEntity);
+		
+		return "redirect:/dash_activity";
 	}
 	
+	@GetMapping("/imgUpload")
+	public String UploadPage()
+	{
+		return "StudentModule/StudentUpload";
+	}
+	
+	@PostMapping("/upload")
+	public String uploadImages(@ModelAttribute StudentEntity entity)
+	{
+		
+		return "StudentModule/Dashboard";
+	}
 	
 	
 	@GetMapping("/viewjobs")
@@ -85,9 +119,11 @@ public class StudentController
 	}
 	
 	@GetMapping("/updateStudentDetails{id}")
+	
 	public String updateDetails(@PathVariable int id,@ModelAttribute StudentEntity studentEntityObj,Model model)
 	{
 	
+		
 		StudentEntity entityObj = studentServiceObj.findByStudentId(id); 
 		if(entityObj!=null)
 		{
@@ -129,6 +165,7 @@ public class StudentController
 		else
 		{
 			Id=entity.getStudentId();
+			session.setAttribute("studentName",entity.getStudentName());
 			model.addAttribute("studentModel",entity);
 			return "StudentModule/StudentDashboard";
 		}

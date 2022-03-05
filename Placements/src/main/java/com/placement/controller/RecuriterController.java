@@ -1,8 +1,11 @@
 package com.placement.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.placement.entity.RecuriterEntity;
 import com.placement.entity.RecuriterJobPostEntity;
+import com.placement.entity.StudentEntity;
 import com.placement.placementservice.RecuriterJobService;
 import com.placement.placementservice.RecuriterService;
+import com.placement.placementservice.StudentService;
 
 
 @Controller
@@ -28,6 +33,9 @@ public class RecuriterController
 	
 	@Autowired
 	RecuriterJobService jobServiceObj;
+	
+	@Autowired
+	StudentService studentServiceObj;
 	
 	@GetMapping("/r_login")
 	public String login()
@@ -56,17 +64,43 @@ public class RecuriterController
 		model.addAttribute("job",obj);
 		return "RecuriterModule/RecDashViewJobs";
 	}
-	
-	@GetMapping("/r_applyjob")
-	public String applyJob()
+	@GetMapping("/postJob")
+	public String postJob()
 	{
+		
 		return "RecuriterModule/RecDashPostJobs";
+	}
+	
+	@GetMapping("/updateStatus{id}")
+	public String updateStatus(@PathVariable int id,@ModelAttribute RecuriterJobPostEntity status)
+	{
+		RecuriterJobPostEntity entity = jobServiceObj.findByJobId(id);
+		entity.setApplyStatus(status.getApplyStatus());
+		jobServiceObj.addJobs(entity);
+		
+		return "redirect:/r_dashboard";
+	}
+	
+	
+	@GetMapping("/r_applyjob{id}")
+	public String applyJob(@PathVariable int id,Model model)
+	{
+		RecuriterJobPostEntity jobEntity = jobServiceObj.findByJobId(id);
+		List<StudentEntity>studentList = new ArrayList<StudentEntity>();
+		studentList.addAll(jobEntity.getStudentList());
+		model.addAttribute("student",studentList);
+		model.addAttribute("job",jobEntity);
+		return "RecuriterModule/RecDashCheckApplicant";
 	}
 	
 	
 	@GetMapping("/r_dash_activity")
-	public String dashActivity()
+	public String dashActivity(Model model)
 	{
+		List<RecuriterJobPostEntity>jobList = jobServiceObj.viewAllJobs();
+		
+		
+		
 		return "RecuriterModule/RecDashCheckApplicant";
 	}
 	
@@ -142,7 +176,7 @@ public class RecuriterController
 	
 	
 	@PostMapping("/recuriterverifylogin")
-	public String verifyLogin(@ModelAttribute RecuriterEntity recuriterEntityObj,Model model)
+	public String verifyLogin(@ModelAttribute RecuriterEntity recuriterEntityObj,Model model,HttpSession session)
 	{
 		
 		RecuriterEntity entity = recuriterServiceObj.findByCompanyEmailAndCompanyPassword(recuriterEntityObj.getCompanyEmail(), recuriterEntityObj.getCompanyPassword());
@@ -153,6 +187,7 @@ public class RecuriterController
 		else
 		{
 			Id=entity.getCompanyId();
+			session.setAttribute("recuriterName", entity.getRecuriterName());
 			model.addAttribute("recuriter", entity);
 			return "redirect:/r_dashboard";
 		}

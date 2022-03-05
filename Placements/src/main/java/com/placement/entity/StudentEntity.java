@@ -42,6 +42,27 @@ public class StudentEntity
 	private String studentState;
 	@Column(unique = true)
 	private String studentPassword;
+	@Column
+	private String applyStatus = "Applied!!";
+	
+	
+	public String getApplyStatus() {
+		return applyStatus;
+	}
+	public void setApplyStatus(String applyStatus) {
+		this.applyStatus = applyStatus;
+	}
+	@OneToMany(cascade = CascadeType.ALL)
+	List<RecuriterJobPostEntity>jobList;
+	
+	
+	
+	public List<RecuriterJobPostEntity> getJobList() {
+		return jobList;
+	}
+	public void setJobList(List<RecuriterJobPostEntity> jobList) {
+		this.jobList = jobList;
+	}
 	public int getStudentId() {
 		return studentId;
 	}
@@ -127,12 +148,12 @@ public class StudentEntity
 				+ ", studentDegree=" + studentDegree + ", studentBranch=" + studentBranch + ", studentAcademicYear="
 				+ studentAcademicYear + ", studentAddress=" + studentAddress + ", studentCity=" + studentCity
 				+ ", studentCountry=" + studentCountry + ", studentState=" + studentState + ", studentPassword="
-				+ studentPassword + "]";
+				+ studentPassword + ", applyStatus=" + applyStatus + ", jobList=" + jobList + "]";
 	}
 	public StudentEntity(int studentId, String studentName, String studentEmail, String studentPhoneno,
 			String studentDateOfBirth, String studentDegree, String studentBranch, int studentAcademicYear,
 			String studentAddress, String studentCity, String studentCountry, String studentState,
-			String studentPassword) {
+			String studentPassword, String applyStatus, List<RecuriterJobPostEntity> jobList) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -147,6 +168,8 @@ public class StudentEntity
 		this.studentCountry = studentCountry;
 		this.studentState = studentState;
 		this.studentPassword = studentPassword;
+		this.applyStatus = applyStatus;
+		this.jobList = jobList;
 	}
 	public StudentEntity() {
 		super();
