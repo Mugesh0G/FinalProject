@@ -1,0 +1,33 @@
+name: Build and attach release JAR
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '11'
+          cache: maven
+          cache-dependency-path: Placements/pom.xml
+
+      - name: Build JAR
+        working-directory: Placements
+        run: mvn --batch-mode --no-transfer-progress package
+
+      - name: Attach JAR to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Placements/target/*.jar
