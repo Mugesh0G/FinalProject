@@ -10,6 +10,20 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ci-only-password
+          MYSQL_DATABASE: hello
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pci-only-password"
+          --health-interval=10s
+          --health-timeout=10s
+          --health-retries=10  
 
     steps:
       - name: Check out repository
@@ -25,6 +39,10 @@ jobs:
 
       - name: Build JAR
         working-directory: Placements
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/hello
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: ci-only-password
         run: mvn --batch-mode --no-transfer-progress package
 
       - name: Attach JAR to release
