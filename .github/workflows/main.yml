@@ -25,7 +25,7 @@ jobs:
         options: >-
           --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pci-only-password"
           --health-interval=10s
-          --health-timeout=5s
+          --health-timeout=10s
           --health-retries=10
 
     steps:
@@ -46,7 +46,7 @@ jobs:
           SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/hello
           SPRING_DATASOURCE_USERNAME: root
           SPRING_DATASOURCE_PASSWORD: ci-only-password
-        run: bash ./mvnw --batch-mode --no-transfer-progress verify
+        run: mvn --batch-mode --no-transfer-progress verify
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
