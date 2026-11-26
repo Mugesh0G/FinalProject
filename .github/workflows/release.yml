@@ -10,7 +10,7 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-    
+
     services:
       mysql:
         image: mysql:8.0
@@ -43,7 +43,7 @@ jobs:
           SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/hello
           SPRING_DATASOURCE_USERNAME: root
           SPRING_DATASOURCE_PASSWORD: ci-only-password
-        run: mvn --batch-mode --no-transfer-progress package
+        run: mvn --batch-mode --no-transfer-progress packag
 
       - name: Attach JAR to release
         uses: softprops/action-gh-release@v2
